@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LMS - Add Book</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    .add-book_body{
+      background-image: url("bgtemp.jpg");
+      background-size: cover;
+      animation: fadeIn 1s ease-in-out;
+      animation: zoomAndMove 15s linear infinite alternate;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .add-book-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    .add-book-form {
+      width: 40%;
+      background-color: #f1f1f1;
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: 3px 6px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .add-book-form h2 {
+      margin-bottom: 20px;
+    }
+
+    .add-book-form .form-group {
+      margin-bottom: 15px;
+    }
+
+    .add-book-form input[type="text"],
+    .add-book-form input[type="number"],
+    .add-book-form select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #stock-status{
+      width: 104.5%;
+    }
+
+    .add-book-form .btn-add-book {
+      width: 100%;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+      background-color: #f857a8;
+      border: none;
+      border-radius: 50px;
+      transition: background-color 0.3s ease-in-out;
+      cursor: pointer;
+      box-shadow: 0px 1px 3px #444;
+    }
+
+    .add-book-form .btn-add-book:hover {
+      color: #f857a8;
+      background-color: #fff;
+    }
+
+    .book-list-container {
+      width: 50%;
+      background-color: #f1f1f1;
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: 3px 6px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-list-container h2 {
+      margin-bottom: 20px;
+    }
+
+    .book-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .book-table th,
+    .book-table td {
+      padding: 8px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .book-table th {
+      text-align: left;
+    }
+
+    .stock {
+      color: green;
+    }
+
+    .out-of-stock {
+      color: red;
+    }
+
+    .form-group{
+      margin-right: 20px;
+    }
+
+    .success-message {
+    color: green;
+    margin-top: 10px;
+    background-color: #e6f4ea;
+    padding: 10px;
+    border-radius: 20px;
+    text-align: center;
+    display: inline-block;
+  }
+
+  .message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  </style>
+</head>
+<body class="add-book_body">
+  <header>
+    <nav>
+      <div class="container">
+        <a class="logo">Library</a>
+        <div class="menu-toggle"></div>
+        <ul class="navigation">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="books.html">Books</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="add-book-container">
+    <div class="add-book-form">
+      <h2>Add Book</h2>
+      <form id="add-book-form" action="#">
+        <div class="form-group">
+          <input type="text" placeholder="Book Name" id="book-name" required>
+        </div>
+
+        <div class="form-group">
+          <input type="text" placeholder="Author" id="author" required>
+        </div>
+
+        <div class="form-group">
+          <input type="text" placeholder="Genre" id="genre" required>
+        </div>
+
+        <div class="form-group">
+          <input type="number" placeholder="Published Year" id="year" min="500" max="2023" required>
+        </div>
+
+        <div class="form-group">
+          <select id="stock-status" required>
+            <option value="">Select Stock Status</option>
+            <option value="in-stock">In Stock</option>
+            <option value="out-of-stock">Out of Stock</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-add-book">Add Book</button>
+      </form>
+    </div>
+
+    <div class="book-list-container">
+      <h2>Book List</h2>
+      <table id="book-table" class="book-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Year</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="book-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="message-container">
+    <div class="success-message" id="success-message"></div>
+  </div>
+
+  <script>
+    var books = [];
+
+    var preExistingBook = {
+    name: "The Fortification",
+    author: "John Doe",
+    genre: "Fiction",
+    year: "2011",
+    stock: true,
+    };
+    var preExistingBook2 ={
+    name: "The God of Minds",
+    author: "Maneesh Amoli",
+    genre: "Theory",
+    year: "2023",
+    stock: false,
+    };
+
+// Adding pre-existing entry to the books array
+    books.push(preExistingBook);
+    books.push(preExistingBook2);
+    displayBooks();
+
+    function addBook(event) {
+      event.preventDefault();
+
+      var bookNameInput = document.getElementById('book-name');
+      var authorInput = document.getElementById('author');
+      var genreInput = document.getElementById('genre');
+      var yearInput = document.getElementById('year');
+      var stockStatusInput = document.getElementById('stock-status');
+
+      var book = {
+        name: bookNameInput.value,
+        author: authorInput.value,
+        genre: genreInput.value,
+        year: yearInput.value,
+        stock: stockStatusInput.value === 'in-stock',
+      };
+
+      books.push(book);
+      displayBooks();
+      event.target.reset();
+
+      var successMessage = document.getElementById('success-message');
+      successMessage.textContent = 'Book added successfully!';
+
+      setTimeout(function() {
+      successMessage.textContent = '';
+      }, 2000);
+    }
+
+      function displayBooks() {
+      var tableBody = document.getElementById('book-table-body');
+      tableBody.innerHTML = '';
+
+      for (var i = 0; i < books.length; i++) {
+        var book = books[i];
+
+        var row = document.createElement('tr');
+        var nameCell = document.createElement('td');
+        var authorCell = document.createElement('td');
+        var genreCell = document.createElement('td');
+        var yearCell = document.createElement('td');
+        var stockCell = document.createElement('td');
+
+        nameCell.textContent = book.name;
+        authorCell.textContent = book.author;
+        genreCell.textContent = book.genre;
+        yearCell.textContent = book.year;
+
+        stockCell.textContent = book.stock ? 'In Stock' : 'Out of Stock';
+        if (book.stock) {
+          stockCell.classList.add('stock');
+        } else {
+          stockCell.classList.add('out-of-stock');
+        }
+
+        row.appendChild(nameCell);
+        row.appendChild(authorCell);
+        row.appendChild(genreCell);
+        row.appendChild(yearCell);
+        row.appendChild(stockCell);
+
+        tableBody.appendChild(row);
+      }
+    }
+
+    var addBookForm = document.getElementById('add-book-form');
+    addBookForm.addEventListener('submit', addBook);
+  </script>
+</body>
+</html>

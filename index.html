@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Library Management System</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+  </style>
+</head>
+<body onload="delayImageLoad()">
+  <header>
+    <nav>
+      <div class="container">
+        <a class="logo">Library</a>
+        <div class="menu-toggle"></div>
+        <ul class="navigation">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home">
+      <div class="container">
+        <div class="left-section">
+          <h1>Welcome to the Library Management System</h1>
+          <p>Welcome to the Library Management System, your all-in-one solution for efficiently managing and organizing your library collection. Our user-friendly interface and powerful features make it easy for you to streamline library operations and provide seamless services to our users.</p>
+        </div>
+        <div class="right-section">
+          <div id="loader" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+          <img id="library-image" class="hidden" alt="Library Image" onload="hideLoadingAnimation(this)">
+      </section>
+    <div class="button-container">
+      <a href="login.html"><button class="list-button">List of Books</button></a>
+      <p>&emsp;&emsp;&emsp;&emsp;&emsp;</p>
+      <a href="login.html"><button class="add-button">Add a Book</button></a>
+    </div>
+    <div class="background-animation"></div>
+  </main>
+    <footer>
+      <p>&copy; 2023 Library Management System. Developed by Maneesh Amoli.</p>
+    </footer>
+  <script src="script.js"></script>
+</body>
+</html>   

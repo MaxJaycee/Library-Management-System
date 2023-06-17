@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LMS - Login</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    .signup-link a{
+      color: lightseagreen;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body class="login_body">
+  <header>
+    <nav>
+      <div class="container">
+        <a class="logo">Library</a>
+        <div class="menu-toggle"></div>
+        <ul class="navigation">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="login">
+      <div class="container">
+        <div class="login-form">
+          <h2>Login to Your Account</h2>
+          <form onsubmit="event.preventDefault();">
+            <input type="text" id="username" placeholder="Username">
+            <div class="password-wrapper">
+              <input type="password" id="password" placeholder="Password">
+              <label for="show-password" id="show-password-label">
+                <input type="checkbox" id="show-password" onclick="togglePasswordVisibility()">
+                <span class="password-toggle-icon"></span>
+              </label>
+            </div>
+            <button type="submit" onclick="return login()">Login</button>
+          </form>
+          <p class="signup-link">Not registered? <a href="signup.html">Sign up here</a></p>
+          <div id="login-status" class="login-status"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Library Management System. Developed by Maneesh Amoli.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

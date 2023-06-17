@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LMS - Sign Up</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    .signup_body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      background-image: url("libhall2.jpg");
+      background-size: 100% auto;
+      background-position: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .signup-container {
+        width: 35%;
+        padding: 20px;
+        border-radius: 4px;
+        margin-left: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        box-shadow: 3px 6px 3px rgba(0, 0, 0, 0.1);
+        animation: fade-in 1s ease-in-out;
+    }
+
+    @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+.signup-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: -11px;
+}
+
+.btn-signup {
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center; 
+    text-decoration: none;
+    color: #fff;
+    background-color: #f857a8;
+    border: none;
+    border-radius: 50px;
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0px 1px 3px #444;
+  }
+  
+  .btn-signup:hover {
+    background-color: #818080;
+  }
+
+  </style>
+</head>
+<body class="signup_body">
+    <header>
+        <nav>
+          <div class="container">
+            <a class="logo">Library</a>
+            <div class="menu-toggle"></div>
+            <ul class="navigation">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="login.html">Login</a></li>
+            </ul>
+          </div>
+        </nav>
+    </header>
+    <div class="signup-container">
+        <h1 class="signup-heading">Register Here</h1>
+        <form id="signup-form" action="/signup" method="post">
+          <div class="form-group">
+            <input type="text" placeholder="First Name" pattern="[A-Za-z]+" required>
+          </div>
+    
+          <div class="form-group">
+            <input type="text" placeholder="Last Name" pattern="[A-Za-z]+" required>
+          </div>
+    
+          <div class="form-group">
+            <input type="email" placeholder="Email" id="email" required>
+            <small id="email-error" class="error-message"></small>
+          </div>
+    
+          <div class="form-group">
+            <input type="date" placeholder="Date of Birth" id="dob" max="2020-12-31" required>
+          </div>
+    
+          <div class="form-group">
+            <input type="text" placeholder="Username" required>
+          </div>
+    
+          <div class="form-group">
+            <input type="password" placeholder="Password" required>
+          </div>
+    
+          <input type="submit" value="Sign Up" class="btn-signup">
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2023 Library Management System. Developed by Maneesh Amoli.</p>
+    </footer>
+    <script>
+      // Signup Alert and Email Validation
+      document.getElementById("signup-form").addEventListener("submit", function(event) {
+      var emailInput = document.getElementById("email");
+      var emailError = document.getElementById("email-error");
+
+      // Validate email format
+      var email = emailInput.value;
+      var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+      if (!email.match(emailPattern)) {
+        emailError.textContent = "Invalid email format";
+        emailError.style.color = "red";
+        event.preventDefault();
+      } else {
+        // Simulate successful signup
+        alert("This website is not supported by backend, and the information can't be stored in a database.\nUse test credentials for login: \n USERNAME: 'admin'   PASSWORD: 'password'\n------Redirecting------");
+        window.location.href = "login.html";
+        event.preventDefault();
+      }
+    });
+    </script>
+</body>
+</html>

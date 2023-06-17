@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LMS - Book List</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    .books{
+        background-image: url("bgtemp.jpg");
+        background-size: cover;
+        animation: fadeIn 1s ease-in-out;
+        animation: zoomAndMove 15s linear infinite alternate;
+    }
+
+    @keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+    .search-bar {
+        margin-top: 1.8%;
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+#search-input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+#search-input:focus {
+  outline: none;
+}
+
+#search-input::placeholder {
+  color: #999;
+}
+
+#search-input::-ms-input-placeholder {
+  color: #999;
+}
+
+button {
+  padding: 8px 16px;
+  margin-left: 10px;
+  background-color: #bc1a5a;
+  color: white;
+  border: none;
+  border-radius: 19px;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: #d2459a;
+}
+
+/* Book table styles */
+#book-table {
+    margin: 0 auto;
+    width: 95%;
+    border-collapse: collapse;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#book-table th,
+#book-table td {
+  padding: 12px 20px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#book-table th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+  color: #333;
+}
+
+#book-table td {
+  background-color: #fff;
+  color: #666;
+}
+
+#book-table tr:nth-child(even) td {
+  background-color: #f2f2f2;
+}
+
+#book-table td.stock {
+  color: #4caf50;
+}
+
+#book-table td.out-of-stock {
+  color: #f44336;
+}
+
+</style>
+</head>
+<body class="books">
+    <header>
+        <nav>
+          <div class="container">
+            <a class="logo">Library</a>
+            <div class="menu-toggle"></div>
+            <ul class="navigation">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="login.html">Login</a></li>
+              <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+          </div>
+        </nav>
+    </header>
+
+    <main class="book-main">
+        <section id="book-list">
+            <div class="container">
+                <h2>List of Popular Books</h2>
+                <button class="custom-button" onclick="window.location.href='add-book.html'">Add Books</button>
+                <form id="search-form" class="search-bar" onsubmit="searchBooks(event)">
+                    <input type="text" id="search-input" placeholder="Search">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        <div class="table-container">
+        <table id="book-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Genre</th>
+              <th>Author</th>
+              <th>Year</th>
+              <th>Status</th>
+              <th>Add to cart</th>
+            </tr>
+          </thead>
+          <tbody id="book-table-body">
+            <!-- Book rows will be dynamically generated here -->
+          </tbody>
+        </table>
+        </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
